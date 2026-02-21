@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ColorSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>ColorSpot</h1>
+      <p>Find the target color in the image. Score is based only on RGB similarity.</p>
+    </header>
+
+    <section class="hud" aria-live="polite">
+      <div class="card">
+        <span class="label">Round</span>
+        <strong id="roundCount">0</strong>
+      </div>
+      <div class="card">
+        <span class="label">Target Color</span>
+        <div id="targetSwatch" class="swatch" role="img" aria-label="Target color"></div>
+        <span id="targetRgb" class="mono">RGB(-, -, -)</span>
+      </div>
+      <div class="card">
+        <span class="label">Your Score</span>
+        <strong id="scoreValue">-</strong>
+      </div>
+    </section>
+
+    <section class="controls">
+      <button id="startBtn">Start Game</button>
+      <button id="submitBtn" disabled>Submit</button>
+      <button id="nextBtn" disabled>Next Round</button>
+    </section>
+
+    <section class="board">
+      <div class="canvasWrap">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="Game image"></canvas>
+        <div id="clickMarker" class="marker" hidden></div>
+      </div>
+      <aside class="results">
+        <h2>Round Result</h2>
+        <p id="roundMessage">Click Start Game to begin.</p>
+        <div class="resultRow">
+          <span>Selected Color</span>
+          <div id="clickedSwatch" class="swatch small"></div>
+          <span id="clickedRgb" class="mono">RGB(-, -, -)</span>
+        </div>
+        <div class="resultRow">
+          <span>RGB Distance</span>
+          <span id="distanceValue" class="mono">-</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+:root {
+  --bg: #f2f5f7;
+  --ink: #162126;
+  --panel: #ffffff;
+  --accent: #017a6d;
+  --line: #d6dde2;
+  --shadow: 0 10px 30px rgba(8, 23, 31, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 20% 0%, #e6f4ef 0%, var(--bg) 45%);
+}
+
+.app {
+  width: min(1120px, 94vw);
+  margin: 24px auto;
+  display: grid;
+  gap: 16px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header p {
+  margin: 6px 0 0;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #52626a;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #9bb6b0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+}
+
+.canvasWrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #dbe4e8;
+  min-height: 280px;
+  box-shadow: var(--shadow);
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: crosshair;
+}
+
+.marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #111;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.results {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.results h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.resultRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.swatch {
+  width: 54px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid #1113;
+}
+
+.swatch.small {
+  width: 34px;
+  height: 20px;
+}
+
+.mono {
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+@media (max-width: 860px) {
+  .hud,
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .resultRow {
+    grid-template-columns: 1fr auto;
+  }
+}
