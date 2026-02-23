@@ -5,34 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ColorSpot</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <button id="themeToggle" class="themeToggle" aria-label="Switch to light mode" title="Toggle theme">
+    <span id="themeIcon" aria-hidden="true"></span>
+  </button>
+
   <main class="app">
     <header class="header">
       <h1>ColorSpot</h1>
-      <p>Find the target color in the image. Score is based only on RGB similarity.</p>
+      <p id="roundMessage">Good luck finding the target color in image.</p>
     </header>
 
-    <section class="hud" aria-live="polite">
-      <div class="card">
-        <span class="label">Round</span>
-        <strong id="roundCount">0</strong>
-      </div>
-      <div class="card">
-        <span class="label">Target Color</span>
-        <div id="targetSwatch" class="swatch" role="img" aria-label="Target color"></div>
-        <span id="targetRgb" class="mono">RGB(-, -, -)</span>
-      </div>
-      <div class="card">
-        <span class="label">Your Score</span>
-        <strong id="scoreValue">-</strong>
-      </div>
-    </section>
-
-    <section class="controls">
-      <button id="startBtn">Start Game</button>
+    <section class="controls" aria-label="Game controls">
+      <button id="startBtn">Start</button>
       <button id="submitBtn" disabled>Submit</button>
       <button id="nextBtn" disabled>Next Round</button>
+      <button id="endBtn" disabled>End</button>
     </section>
 
     <section class="board">
@@ -40,22 +32,50 @@
         <canvas id="gameCanvas" width="1280" height="720" aria-label="Game image"></canvas>
         <div id="clickMarker" class="marker" hidden></div>
       </div>
-      <aside class="results">
-        <h2>Round Result</h2>
-        <p id="roundMessage">Click Start Game to begin.</p>
-        <div class="resultRow">
-          <span>Selected Color</span>
-          <div id="clickedSwatch" class="swatch small"></div>
-          <span id="clickedRgb" class="mono">RGB(-, -, -)</span>
+
+      <aside class="sidebar" aria-live="polite">
+        <div class="panel roundPanel">
+          <span class="label">Round</span>
+          <strong id="roundCount" class="value roundNo">0</strong>
         </div>
-        <div class="resultRow">
-          <span>RGB Distance</span>
-          <span id="distanceValue" class="mono">-</span>
+
+        <div class="panel split">
+          <div class="block">
+            <span class="label">Target</span>
+            <div id="targetSwatch" class="swatch" role="img" aria-label="Target color"></div>
+            <span id="targetRgb" class="mono">(-, -, -)</span>
+          </div>
+          <div class="block">
+            <span class="label">Selected</span>
+            <div id="clickedSwatch" class="swatch" role="img" aria-label="Selected color"></div>
+            <span id="clickedRgb" class="mono">(-, -, -)</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <span class="label">Metrics</span>
+          <div class="metricRow">
+            <span>Score</span>
+            <span id="scoreValue" class="value placeholder">-</span>
+          </div>
+          <div class="metricRow">
+            <span>RGB Distance</span>
+            <span id="distanceValue" class="mono">-</span>
+          </div>
         </div>
       </aside>
     </section>
   </main>
 
+  <section id="endScreen" class="endScreen" hidden aria-live="polite">
+    <div class="endCard">
+      <p class="endTitle">Game ended</p>
+      <h2 id="endScoreValue" class="endScore">0.00/0</h2>
+      <button id="playAgainBtn" class="playAgainBtn">Play Again</button>
+    </div>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
+
