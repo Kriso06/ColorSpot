@@ -45,6 +45,7 @@ let selected = null;
 let totalScore = 0;
 let completedRounds = 0;
 let gameEnded = false;
+const headerMessage = roundMessage.textContent;
 
 const MOON_ICON = `
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -154,7 +155,7 @@ async function startRound() {
   roundCount.textContent = String(round);
   scoreValue.textContent = "-";
   scoreValue.classList.add("placeholder");
-  roundMessage.textContent = "Image loaded. Click the canvas any number of times, then press Submit.";
+  roundMessage.textContent = headerMessage;
   targetRgbText.textContent = "(-, -, -)";
   clickedSwatch.style.backgroundColor = "transparent";
   clickedRgbText.textContent = "(-, -, -)";
@@ -169,7 +170,7 @@ async function startRound() {
   try {
     await loadRoundImage();
   } catch (err) {
-    roundMessage.textContent = "Could not load image. Check your internet and try next round.";
+    roundMessage.textContent = headerMessage;
     nextBtn.disabled = false;
   } finally {
     startBtn.disabled = round > 0;
@@ -196,7 +197,7 @@ canvas.addEventListener("click", (event) => {
 
   clickedSwatch.style.backgroundColor = rgbToCss(clicked);
   clickedRgbText.textContent = "(-, -, -)";
-  roundMessage.textContent = "Selection updated. You can click again, then press Submit.";
+  roundMessage.textContent = headerMessage;
 
   clickMarker.style.left = `${event.clientX - rect.left}px`;
   clickMarker.style.top = `${event.clientY - rect.top}px`;
@@ -219,7 +220,7 @@ submitBtn.addEventListener("click", () => {
   distanceValue.textContent = distance.toFixed(2);
   targetRgbText.textContent = `(${target.r}, ${target.g}, ${target.b})`;
   clickedRgbText.textContent = `(${selected.r}, ${selected.g}, ${selected.b})`;
-  roundMessage.textContent = `Round complete. Your color similarity score is ${score.toFixed(2)}/10.`;
+  roundMessage.textContent = headerMessage;
 
   roundResolved = true;
   submitBtn.disabled = true;
@@ -232,7 +233,7 @@ endBtn.addEventListener("click", () => {
   const maxScore = completedRounds * 10;
   endScoreValue.textContent = `${totalScore.toFixed(2)}/${maxScore}`;
 
-  roundMessage.textContent = "";
+  roundMessage.textContent = headerMessage;
 
   roundResolved = true;
   gameEnded = true;
